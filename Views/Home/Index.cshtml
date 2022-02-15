@@ -1,0 +1,23 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model BooksViewModel
+
+@foreach (Book b in Model.Books)
+{
+    <h3>@b.Title</h3>
+    <ul>
+        <li>Author: @b.Author</li>
+        <li>Category: @b.Category</li>
+        <li>Isbn: @b.Isbn</li>
+        <li>Page Count:@b.PageCount</li>
+        <li>Price: @b.Price</li>
+        <li>Publisher: @b.Publisher</li>
+        <li>Classificaiton: @b.Classification</li>
+
+    </ul>
+    <br />
+}
+
+
+<div page-blah="@Model.PageInfo" page-action="Index"></div>
