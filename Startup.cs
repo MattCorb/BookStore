@@ -28,6 +28,11 @@ namespace BookStore
         {
             services.AddControllersWithViews();
 
+            services.AddRazorPages();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+
             services.AddDbContext <BookstoreContext> (options  =>
             {
                 options.UseSqlite(Configuration["ConnectionStrings:BookDBConnection"]);
@@ -45,11 +50,24 @@ namespace BookStore
 
             app.UseStaticFiles();
 
+            app.UseSession();
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("categorypage","{Category}/Page{pageNum}", new { Controller = "Home", Action = "Index"});
+
+
+                endpoints.MapControllerRoute(name: "Paging", pattern: "Page{pageNum}", defaults: new { Controller = "Home", Action = "Index" ,pageNum=1});
+
+
+                endpoints.MapControllerRoute("Category", "{Category}", new { Controller = "Home", Action = "Index", pageNum = 1 });
+
+
                 endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
             });
         }
     }

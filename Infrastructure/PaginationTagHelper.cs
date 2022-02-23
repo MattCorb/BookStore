@@ -26,6 +26,10 @@ namespace BookStore.Infrastructure
         
         public PageInfo PageBlah { get;set;}
         public string PageAction { get; set; }
+        public string PageClass { get; set; }
+        public bool PageClassEnable { get; set; }
+        public string PageClassNormal { get; set;}
+        public string PageClassSelected { get; set; }
         
         public override void Process(TagHelperContext thc, TagHelperOutput tho)
         {
@@ -33,17 +37,28 @@ namespace BookStore.Infrastructure
 
             TagBuilder final = new TagBuilder("div");
 
-            for (int i =  1; i < PageBlah.TotalPages; i++)
+            for (int i =  1; i <= PageBlah.TotalPages; i++)
             {
                 TagBuilder tb = new TagBuilder("a");
 
                 tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i });
+               
+
+                if (PageClassEnable)
+                {
+                    tb.AddCssClass(PageClass);
+                    tb.AddCssClass(i == PageBlah.CurrentPage ? PageClassSelected : PageClassNormal);
+                }
+
+                tb.AddCssClass(PageClass);
                 tb.InnerHtml.Append(i.ToString());
 
                 final.InnerHtml.AppendHtml(tb);
+                
             }
 
             tho.Content.AppendHtml(final.InnerHtml);
+
         }
     }
 }

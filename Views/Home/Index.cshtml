@@ -4,51 +4,18 @@
 @model BooksViewModel
 
 
-    <head>
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    </head>
-    <body class="bg-body bg-">
-        <div class="container">
-            <div class="row">
-                <div class="col-4"><h1></h1></div>
-                <div class="col-8"><h1>Not Amazon's Book Store</h1></div>
-                @*<div class="col-"><h1></h1></div>*@
-            </div>
-        </div>
+@foreach (Book b in Model.Books)
+{
+    <div class="card p-1 m-1"><partial name="ProjectSummary" model="b" /></div>
+    <br />
+}
+<br />
 
-        <div class="container">
-            <div class="row">
-                <div class="col-5"></div>
-                <div class="col-lg-7">
+<div class="container">
+    <div class="row">
+        
+        <div class="btn-group pull-right m-1" page-blah="@Model.PageInfo" page-action="Index" page-class="btn" page-class-normal="btn-outline-dark" page-class-selected="btn-primary" page-class-enable="true" ></div>
 
-                    @foreach (Book b in Model.Books)
-                    {
-                        <h3 class="align-content-center">@b.Title</h3>
-                        <ul>
-                            <li>Author: @b.Author</li>
-                            <li>Category: @b.Category</li>
-                            <li>Isbn: @b.Isbn</li>
-                            <li>Page Count:@b.PageCount</li>
-                            <li>Price: $@b.Price</li>
-                            <li>Publisher: @b.Publisher</li>
-                            <li>Classificaiton: @b.Classification</li>
+    </div>
+</div>
 
-                        </ul>
-                        <br />
-                    }
-                </div>
-
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6"></div>
-                <div class="col-lg-6" page-blah="@Model.PageInfo" page-action="Index"></div>
-
-            </div>
-        </div>
-
-        <br />
-
-    </body>

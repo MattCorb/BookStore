@@ -1,0 +1,23 @@
+﻿
+@{
+}
+
+@model Book
+<div class="bg-light">
+    <h3 class="align-content-center">@Model.Title</h3>
+    <span class="badge bg-info" style="float:right">Price: $@Model.Price</span>
+</div>
+
+<ul>
+    <li>Author: @Model.Author</li>
+    <li>Category: @Model.Category</li>
+    <li>Isbn: @Model.Isbn</li>
+    <li>Page Count: @Model.PageCount</li>
+    <li>Publisher: @Model.Publisher</li>
+    <li>Classificaiton: @Model.Classification</li>
+</ul>
+<form method="post" asp-page="/cart">
+    <input type="hidden" asp-for="@Model.BookId"/>
+    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()"/>
+     <span class="card-text"><button type="submit" class="btn btn-success btn-sm float-end" >Add to Cart</button></span>
+</form>
