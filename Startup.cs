@@ -31,7 +31,12 @@ namespace BookStore
             services.AddRazorPages();
 
             services.AddDistributedMemoryCache();
+
             services.AddSession();
+
+            services.AddScoped<Basket>(x => SessionBasket.GetBasket(x));
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddDbContext <BookstoreContext> (options  =>
             {
@@ -51,6 +56,7 @@ namespace BookStore
             app.UseStaticFiles();
 
             app.UseSession();
+
 
             app.UseRouting();
 
