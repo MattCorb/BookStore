@@ -1,0 +1,95 @@
+﻿@page "/admin/books"
+@page "/admin"
+@inherits OwningComponentBase<IBookstoreRepository>
+    @*<div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    All Books
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+
+                <div class="accordion-body" >*@
+                    <table class="table table-sm table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <td>Book ID</td>
+                                <td>Title</td>
+                                <td>Author</td>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+
+                            @if (BookData?.Count() > 0)
+                            {
+                                //list books
+                                @foreach (Book b in BookData)
+                                {
+                                    <tr>
+                                        <td>@b.BookId</td>
+                                        <td>@b.Title</td>
+                                        <td>@b.Author</td>
+
+                                        <td>
+                                            <NavLink class="btn btn-info btn-sm" href="@GetDetailsUrl(b.BookId)">Details</NavLink>
+                                        </td>
+                                        <td>
+                                            <NavLink class="btn btn-warning btn-sm" href="@GetEditUrl(b.BookId)">Edit</NavLink>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-danger btn-sm" @onclick="@(x => RemoveBook(b))">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="5" class="text-center">No Books</td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+
+                    </table>
+                @*</div>
+            </div>
+        </div>
+        </div>*@
+
+        <NavLink class="btn btn-primary" href="/admin/books/create">Create</NavLink>
+
+        @code {
+            public IBookstoreRepository repo => Service;
+
+            public IEnumerable<Book> BookData { get; set; }
+
+            protected async override Task OnInitializedAsync()
+            {
+                await UpdateData();
+            }
+
+            public async Task UpdateData()
+            {
+                BookData = await repo.Books.ToListAsync();
+            }
+
+
+
+            public string GetDetailsUrl(long id) => $"/admin/books/details/{id}";
+
+            public string GetEditUrl(long id) => $"/admin/books/edit/{id}";
+
+            public async Task RemoveBook(Book b)
+            {
+                repo.DeleteBook(b);
+                await UpdateData();
+
+            }
+
+
+
+        }
