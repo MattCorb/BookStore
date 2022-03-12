@@ -1,39 +1,52 @@
 ﻿@{
+    Layout = null;
 }
 
 @model LoginModel
 
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>Not Amazon Login</title>
-        <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-
-    </head>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Not Amazon Login</title>
+    <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
 <body>
-    
     <div class="bg-dark text-white p-2">
-        <span class="navbar-brand m-l-2">Not Amazon</span>
+        <span class="navbar-brand m-l-2"><code>Not Amazon</code></span>
     </div>
 
-    <div class="m-1 p-1">
-        <div class="text-danger" asp-validation-summary="All"></div>
-        <form method="post" asp-controller="Account" asp-action="Login ">
-            <div class="form-group">
-                <label asp-for="Username">User Name:</label>
-                <input class="form-control" asp-for="Username" />
-            </div>
+    <div class="container">
+        <h2>Simple Collapsible</h2>
+        <p>Click on the button to toggle between showing and hiding content.</p>
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Simple collapsible</button>
+        <div id="demo" class="collapse">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </div>
+        </div>
+        <div class="m-1 p-1">
+            <div class="text-danger" asp-validation-summary="All"></div>
 
-            <div class="form-group">
-                <label asp-for="Password">Password:</label>
-                <input class="form-control" asp-for="Password" />
-            </div>
+            <form method="post" asp-controller="Account" asp-action="Login">
+                <div class="form-group">
+                    <label asp-for="Username">User Name:</label>
+                    <input class="form-control " asp-for="Username" />
+                </div>
 
-            <button class="btn btn-primary" type="submit">Login</button>
+                <div class="form-group">
+                    <label asp-for="Password">Password:</label>
+                    <input type="password" class="form-control" asp-for="Password" />
+                </div>
 
-            <input type="hidden" asp-for="ReturnUrl" />
-         </form>
-    </div> 
+                <button class="btn btn-primary" type="submit">Login</button>
+
+                <input type="hidden" asp-for="ReturnUrl" />
+            </form>
+        </div>
 
 </body>
 </html>

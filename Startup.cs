@@ -92,6 +92,11 @@ namespace BookStore
 
                 endpoints.MapFallbackToPage("/admin/{*catchcall}", "/Admin/Index");
             });
+
+
+            IdentitySeedData.EnsurePopulated(app);
+
+
         }
     }
 }
